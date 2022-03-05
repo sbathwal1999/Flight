@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type = "text/css" href="{{ url_for('static',filename = 'style.css')}}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body>
+    <!----------Header----------->
+    <section class="header">
+      <nav>
+        <a href="/"><img src="{{ url_for('static',filename = 'logo3.png')}}" alt="Logo" /></a>
+        <div class="nav-links">
+          <ul>
+            <li><a href="/">HOME</a></li>
+            <li><a href="https://github.com/sbathwal1999/Flight_Price_Prediction">REPORT</a></li>
+            <li><a href="https://github.com/sbathwal1999/Flight_Price_Prediction">GITHUB</a></li>
+          </ul>
+        </div>
+      </nav>
+    </section>
+
+    <!-------Flight-------->
+    <section class="flight">
+      <h1>PREDICT PRICE</h1>
+      <p>Select the Required Field to Predict Flight Price</p>
+      <form action="{{ url_for('predict')}}" method="post">
+        <div class="row1">
+          <div class="flight-col">
+            <h2>SOURCE CITY</h2>
+            <br /><br />
+            <select id="from" name="from" onchange="getSource()">
+              <option value="from">From</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Bangalore">Bangalore</option>
+              <option value="Kolkata">Kolkata</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Chennai">Chennai</option>
+            </select>
+          </div>
+
+          <div class="flight-col">
+            <h2>DESTINATION CITY</h2>
+            <br /><br />
+            <select id="to" name="to" onchange=getDestination()">
+              <option value="to">To</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Bangalore">Bangalore</option>
+              <option value="Kolkata">Kolkata</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Chennai">Chennai</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row2">
+          <div>
+            <h2>Date of Travel</h2>
+            <br /><br />
+            <select id="month" name="month" onchange="getMonth()">
+              <option value="month">Month</option>
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+            <select id="day" name="day" onchange="getDay()">
+              <option value="day">Day</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+            </select>
+          </div>
+
+          <div>
+            <h2>Time</h2>
+            <br /><br />
+            <select id="time" name="time" onchange="getTime()">
+              <option value="time">Time</option>
+              <option value="Early Morning">Early Morning</option>
+              <option value="Morning">Morning</option>
+              <option value="Afternoon">Afternoon</option>
+              <option value="Evening">Evening</option>
+              <option value="Night">Night</option>
+              <option value="Late Night">Late Night</option>
+            </select>
+          </div>
+
+          <div>
+            <h2>Duration</h2>
+            <br /><br />
+            <select id="duration" name="duration" onchange="getDuration()">
+              <option value="duration">Duration</option>
+              <option value="Short">Short</option>
+              <option value="Medium">Medium</option>
+              <option value="Long">Long</option>
+            </select>
+          </div>
+
+          <div>
+            <h2>Airline</h2>
+            <br /><br />
+            <select id="airline" name="airline" onchange="getAirline()">
+              <option value="airline">Airline</option>
+              <option value="Vistara">Vistara</option>
+              <option value="Air India">Air India</option>
+              <option value="Indigo">Indigo</option>
+              <option value="GO FIRST">GO FIRST</option>
+              <option value="AirAsia">AirAsia</option>
+              <option value="SpiceJet">SpiceJet</option>
+            </select>
+          </div>
+
+          <div>
+            <h2>Class</h2>
+            <br /><br />
+            <select id="class" name="class" onchange="getClass()">
+              <option value="class">Class</option>
+              <option value="Business">Business</option>
+              <option value="Economy">Economy</option>
+            </select>
+          </div>
+
+          <div>
+            <h2>Stops</h2>
+            <br /><br />
+            <select id="stop" name = "stop" onchange="getStop()">
+              <option value="stop">Stop</option>
+              <option value="0">No</option>
+              <option value="1">One</option>
+              <option value="2+">Two or More</option>
+            </select>
+          </div>
+        </div>
+        <input type="submit" value="Predict"/>
+      </form>
+      <br><br><h3>{{ prediction_text }}<h3>
+    </section>
+
+    <script>
+      function getSource() {
+        var from = document.getElementById("from").value;
+
+        console.log(from);
+      }
+
+      function getDestination() {
+        var to = document.getElementById("to").value;
+        console.log(to);
+      }
+
+      function getMonth() {
+        var month = document.getElementById("month").value;
+        console.log(month);
+      }
+
+      function getDay() {
+        var day = document.getElementById("day").value;
+        console.log(day);
+      }
+      function getTime() {
+        var time = document.getElementById("time").value;
+        console.log(time);
+      }
+
+      function getDuration() {
+        var duration = document.getElementById("duration").value;
+        console.log(duration);
+      }
+
+      function getAirline() {
+        var airline = document.getElementById("airline").value;
+        console.log(airline);
+      }
+
+      function getClass() {
+        var class_b_e = document.getElementById("class").value;
+        console.log(class_b_e);
+      }
+
+      function getStop() {
+        var stop = document.getElementById("stop").value;
+        console.log(stop);
+      }
+    </script>
+  </body>
+</html>
